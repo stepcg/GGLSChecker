@@ -23,9 +23,9 @@ echo "Resolved IPs: $IPS"
 
 for IP in $IPS; do
     echo "Checking IP: $IP"
-    RESPONSE=$(curl -k -s --resolve "$DOMAIN:443:$IP" "https://$DOMAIN" | head -n 50)
+    RESPONSE=$(curl -k -s --resolve "$DOMAIN:443:$IP" "https://$DOMAIN")
 
-    if echo "$RESPONSE" | grep -iqE "LightSpeed|LS|ls|redirected|blocked|restricted|this website has been blocked"; then
+    if echo "$RESPONSE" | grep -iqE "LightSpeed|LS|ls|redirected|blocked|restricted|this website has been blocked|This website has been blocked by your administrator."; then
         echo "❌ $DOMAIN is BLOCKED by GoGuardian/LS."
     else
         echo "✅ $DOMAIN is ALLOWED."
